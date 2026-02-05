@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="main-container" class="container">
+        <!-- Top Half: Funny GIF -->
+        <div class="top-half">
+            <img id="funny-gif" src="Gifs/racoon.gif" alt="Funny GIF">
+        </div>
+
+        <!-- Bottom Half: Prompt and Buttons -->
+        <div class="bottom-half">
+            <p class="prompt-text">will you be my valentine?</p>
+            <div class="buttons-container">
+                <button id="button-yes" class="button button-yes">yes</button>
+                <button id="button-no" class="button button-no">no</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Screen -->
+    <div id="success-screen" class="success-screen hidden">
+        <div class="fireworks-container">
+            <img id="fireworks-gif" src="Gifs/happy_minions.gif" alt="Fireworks">
+        </div>
+        <div class="success-text">yayyyyyyyy!!!!!!!</div>
+    </div>
+
+    <!-- Background Audio -->
+    <audio id="background-audio" preload="auto" autoplay>
+        <source src="Audio/In The Air 2.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
