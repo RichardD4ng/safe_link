@@ -179,16 +179,122 @@ body {
 
 /* Responsive design */
 @media (max-width: 768px) {
+    body {
+        overflow: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .container {
+        min-height: 100vh;
+        min-height: -webkit-fill-available; /* iOS Safari fix */
+    }
+    
+    .top-half {
+        min-height: 50vh;
+        padding: 10px;
+    }
+    
+    .bottom-half {
+        min-height: 50vh;
+        padding: 15px;
+    }
+    
     .prompt-text {
         font-size: 1.8em;
+        margin-bottom: 20px;
+        padding: 0 10px;
+    }
+    
+    .buttons-container {
+        gap: 15px;
+        padding: 0 10px;
     }
     
     .button {
         font-size: 1.2em;
         padding: 15px 30px;
+        min-width: 100px;
+        min-height: 50px;
+        -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+        touch-action: manipulation; /* Improve touch response */
+    }
+    
+    .button-yes {
+        min-width: 100px;
+        min-height: 50px;
+    }
+    
+    .button-no {
+        min-width: 100px;
+        min-height: 50px;
     }
     
     .success-text {
         font-size: 2.5em;
+        padding: 0 20px;
+    }
+}
+
+/* Extra small devices (phones in portrait) */
+@media (max-width: 480px) {
+    .prompt-text {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+    }
+    
+    .button {
+        font-size: 1em;
+        padding: 12px 25px;
+        min-width: 90px;
+        min-height: 45px;
+    }
+    
+    .buttons-container {
+        gap: 12px;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .success-text {
+        font-size: 2em;
+        padding: 0 15px;
+    }
+    
+    .top-half {
+        padding: 5px;
+    }
+    
+    .bottom-half {
+        padding: 10px;
+    }
+}
+
+/* Landscape orientation on mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .prompt-text {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+    
+    .button {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+    
+    .top-half {
+        padding: 5px;
+    }
+    
+    .bottom-half {
+        padding: 10px;
+    }
+}
+
+/* Prevent text size adjustment on iOS */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    select,
+    textarea,
+    input {
+        font-size: 16px !important;
     }
 }
