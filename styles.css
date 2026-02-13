@@ -16,6 +16,64 @@ body {
     flex-direction: column;
     height: 100vh;
     width: 100vw;
+    background: linear-gradient(180deg, #ff9a9e 0%, #fecfef 50%, #ff9a9e 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Floating Hearts Background */
+.hearts-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.heart {
+    position: absolute;
+    font-size: 20px;
+    color: rgba(255, 105, 180, 0.6);
+    animation: float 15s infinite ease-in-out;
+    user-select: none;
+    line-height: 1;
+    display: inline-block;
+    width: auto;
+    height: auto;
+}
+
+.heart-small {
+    font-size: 14px;
+    color: rgba(255, 105, 180, 0.5);
+}
+
+.heart-medium {
+    font-size: 20px;
+    color: rgba(255, 105, 180, 0.6);
+}
+
+.heart-large {
+    font-size: 28px;
+    color: rgba(255, 105, 180, 0.7);
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(110vh) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    5% {
+        opacity: 1;
+    }
+    95% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-10vh) translateX(50px) rotate(360deg);
+        opacity: 0;
+    }
 }
 
 .hidden {
@@ -28,12 +86,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    background: transparent;
+    position: relative;
+    z-index: 2;
 }
 
 .top-half img {
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
 }
 
@@ -44,8 +104,9 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #fecfef 0%, #ff9a9e 100%);
+    background: transparent;
     position: relative;
+    z-index: 2;
     padding: 20px;
 }
 
@@ -91,7 +152,7 @@ body {
 }
 
 .button-yes {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #ff6b9d 0%, #ff1744 100%);
     color: white;
     min-width: 120px;
     min-height: 60px;
@@ -154,8 +215,7 @@ body {
 .fireworks-container img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    object-position: center;
+    object-fit: cover;
 }
 
 .success-text {
@@ -180,134 +240,16 @@ body {
 
 /* Responsive design */
 @media (max-width: 768px) {
-    body {
-        overflow: hidden;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    .container {
-        min-height: 100vh;
-        min-height: -webkit-fill-available; /* iOS Safari fix */
-    }
-    
-    .top-half {
-        min-height: 50vh;
-        padding: 10px;
-    }
-    
-    .bottom-half {
-        min-height: 50vh;
-        padding: 15px;
-    }
-    
     .prompt-text {
         font-size: 1.8em;
-        margin-bottom: 20px;
-        padding: 0 10px;
-    }
-    
-    .buttons-container {
-        gap: 15px;
-        padding: 0 10px;
     }
     
     .button {
         font-size: 1.2em;
         padding: 15px 30px;
-        min-width: 100px;
-        min-height: 50px;
-        -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
-        touch-action: manipulation; /* Improve touch response */
-    }
-    
-    .button-yes {
-        min-width: 100px;
-        min-height: 50px;
-    }
-    
-    .button-no {
-        min-width: 100px;
-        min-height: 50px;
     }
     
     .success-text {
         font-size: 2.5em;
-        padding: 0 20px;
-    }
-    
-    .fireworks-container img {
-        object-fit: contain;
-        max-width: 100%;
-        max-height: 100%;
-    }
-}
-
-/* Extra small devices (phones in portrait) */
-@media (max-width: 480px) {
-    .prompt-text {
-        font-size: 1.5em;
-        margin-bottom: 15px;
-    }
-    
-    .button {
-        font-size: 1em;
-        padding: 12px 25px;
-        min-width: 90px;
-        min-height: 45px;
-    }
-    
-    .buttons-container {
-        gap: 12px;
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-    
-    .success-text {
-        font-size: 2em;
-        padding: 0 15px;
-    }
-    
-    .top-half {
-        padding: 5px;
-    }
-    
-    .bottom-half {
-        padding: 10px;
-    }
-    
-    .fireworks-container img {
-        object-fit: contain;
-        max-width: 100%;
-        max-height: 100%;
-    }
-}
-
-/* Landscape orientation on mobile */
-@media (max-width: 768px) and (orientation: landscape) {
-    .prompt-text {
-        font-size: 1.5em;
-        margin-bottom: 10px;
-    }
-    
-    .button {
-        font-size: 1em;
-        padding: 10px 20px;
-    }
-    
-    .top-half {
-        padding: 5px;
-    }
-    
-    .bottom-half {
-        padding: 10px;
-    }
-}
-
-/* Prevent text size adjustment on iOS */
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-    select,
-    textarea,
-    input {
-        font-size: 16px !important;
     }
 }

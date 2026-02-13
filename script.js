@@ -16,6 +16,7 @@ const bottomHalf = document.querySelector('.bottom-half');
 const mainContainer = document.getElementById('main-container');
 const successScreen = document.getElementById('success-screen');
 const backgroundAudio = document.getElementById('background-audio');
+const fireworksAudio = document.getElementById('fireworks-audio');
 
 // Store original button sizes and font sizes (captured after page load)
 let originalYesSize = {
@@ -261,6 +262,22 @@ function transformToSuccessScreen() {
     // Show success screen
     successScreen.classList.remove('hidden');
     
+    // Play fireworks audio and make it loop
+    if (fireworksAudio) {
+        fireworksAudio.volume = 1.0; // Full volume for fireworks
+        fireworksAudio.play().then(function() {
+            console.log('Fireworks audio started');
+        }).catch(function(error) {
+            console.log('Fireworks audio play error:', error);
+            // Try again after a short delay
+            setTimeout(function() {
+                fireworksAudio.play().catch(function(err) {
+                    console.log('Fireworks audio retry failed:', err);
+                });
+            }, 100);
+        });
+    }
+    
     // Add some sparkle effect
     createSparkles();
 }
@@ -309,3 +326,66 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Floating Hearts Background Effect
+let heartsContainer;
+const heartSizes = ['heart-small', 'heart-medium', 'heart-large'];
+
+function createHeart() {
+    if (!heartsContainer) return;
+    
+    const heart = document.createElement('div');
+    const sizeClass = heartSizes[Math.floor(Math.random() * heartSizes.length)];
+    heart.className = `heart ${sizeClass}`;
+    heart.textContent = '♥';
+    
+    // Random starting position (0-100% of width)
+    const startX = Math.random() * 100;
+    heart.style.left = `${startX}%`;
+    
+    // Random animation duration (8-15 seconds)
+    const duration = 8 + Math.random() * 7;
+    heart.style.animationDuration = `${duration}s`;
+    
+    // Random delay (0-3 seconds)
+    heart.style.animationDelay = `${Math.random() * 3}s`;
+    
+    heartsContainer.appendChild(heart);
+    
+    // Remove heart after animation completes
+    setTimeout(() => {
+        if (heart.parentNode) {
+            heart.remove();
+        }
+    }, (duration + 3) * 1000);
+}
+
+// Create hearts periodically (only on main page, not success screen)
+function startHeartAnimation() {
+    heartsContainer = document.getElementById('hearts-container');
+    if (!heartsContainer) {
+        console.error('Hearts container not found');
+        return;
+    }
+    
+    // Create initial hearts
+    for (let i = 0; i < 10; i++) {
+        setTimeout(() => createHeart(), i * 300);
+    }
+    
+    // Continue creating hearts every 1.5 seconds
+    const heartInterval = setInterval(() => {
+        if (!successScreen || !successScreen.classList.contains('hidden')) {
+            clearInterval(heartInterval);
+            return;
+        }
+        createHeart();
+    }, 1500);
+}
+
+// Start heart animation when page loads
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startHeartAnimation);
+} else {
+    startHeartAnimation();
+}
